@@ -2,3 +2,4 @@
 export { default as Header } from './Header/Header';
 export { default as Input } from './TextInput/TextInput';
 export { default as SubmitButton } from './SubmitButton/SubmitButton';
+export { default as Text } from './Text/Text';

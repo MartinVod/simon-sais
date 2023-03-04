@@ -9,12 +9,14 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet} from 'react-native';
 
 import MainNavigator from './src/Navigation/MainNavigator/MainNavigator';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {colors} from '~/utils/colors';
+
+import './src/Firebase/init';
 
 const App = () => {
   return (

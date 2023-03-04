@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
+import {NavigationProp} from '@react-navigation/native';
 
-import {Input, SubmitButton} from '~/Components';
+import {Input, SubmitButton, Text} from '~/Components';
+import {RootStackParamList} from '~/Navigation/AuthNavigator/AuthNavigator';
 
 import Logo from '~/Assets/Images/Logo.png';
 import {colors} from '~/utils/colors';
 
-const Login = () => {
+type LoginProps = {
+  navigation: NavigationProp<RootStackParamList, 'Login'>;
+};
+
+const Login = ({navigation}: LoginProps) => {
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -26,9 +32,14 @@ const Login = () => {
     setLoading(false);
   };
 
+  const navigateToSignUp = () => {
+    navigation.navigate('Register');
+  };
+
   return (
     <View style={styles.container}>
       <Image source={Logo} style={styles.image} resizeMode="contain" />
+      <Text variant="title"> Login </Text>
       <Input
         value={values?.email}
         onChange={handleInputChange}
@@ -42,7 +53,10 @@ const Login = () => {
         name="password"
         secureTextEntry
       />
-      <SubmitButton onPress={handleSubmit} label="Log In" disabled={loading} />
+      <SubmitButton onPress={handleSubmit} label="Submit" disabled={loading} />
+      <Text variant="link" lineHeight={40} onPress={navigateToSignUp}>
+        or sign up
+      </Text>
     </View>
   );
 };
