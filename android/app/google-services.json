@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "474581241631",
+    "project_id": "simonsais-a38e0",
+    "storage_bucket": "simonsais-a38e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474581241631:android:9fa90ffc524bf31f4b2a2a",
+        "android_client_info": {
+          "package_name": "com.martinvod.simonsais"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474581241631-8q3qdncv7lrd3atu6a50ukdjhj53l3h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkzQ48eCfsfzNkrUHz0M_gqdqRu8vZ1fU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474581241631-8q3qdncv7lrd3atu6a50ukdjhj53l3h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
