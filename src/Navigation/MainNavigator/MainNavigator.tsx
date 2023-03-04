@@ -1,22 +1,25 @@
-import * as React from 'react';
+import React, {useState} from 'react';
+import {onAuthStateChanged} from 'firebase/auth';
+import {auth} from '~/Firebase/init';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthNavigator from '../AuthNavigator/AuthNavigator';
-
-const Stack = createNativeStackNavigator();
+import HomeNavigator from '../HomeNavigator/HomeNavigator';
 
 function MainNavigator() {
-  return (
-    <Stack.Navigator initialRouteName="AuthNavigator">
-      <Stack.Screen
-        name="AuthNavigator"
-        component={AuthNavigator}
-        options={{
-          header: () => null,
-        }}
-      />
-    </Stack.Navigator>
-  );
+  const [authenticated, setAuthenticated] = useState(false);
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      // User is signed in
+
+      setAuthenticated(true);
+      // ...
+    } else {
+      // User is signed out
+      setAuthenticated(false);
+    }
+  });
+  return authenticated ? <HomeNavigator /> : <AuthNavigator />;
 }
 
 export default MainNavigator;
