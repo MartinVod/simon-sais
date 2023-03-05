@@ -1,22 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 
 // import {HomeDrawerParamList} from '~/Navigation/HomeNavigator';
 import {logout} from '~/Firebase/actions';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {colors} from '~/utils/colors';
 
 interface HeaderProps {
   // navigation: HomeDrawerParamList;
+  goBack: () => void;
 }
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({goBack}) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Text style={styles.menu}>☰</Text>
+      <TouchableOpacity onPress={goBack}>
+        <Icon name="keyboard-backspace" color={colors.black} size={22} />
       </TouchableOpacity>
-      <Text style={styles.title}>Hello</Text>
+
       <TouchableOpacity onPress={logout}>
-        <Text style={styles.logout}>Logout</Text>
+        <Icon name="logout" color={colors.black} size={22} />
       </TouchableOpacity>
     </View>
   );
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#f2f2f2',
   },
-  menu: {
+  goBack: {
     fontSize: 24,
     fontWeight: 'bold',
   },

@@ -3,6 +3,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {GameScreen, GameOverScreen} from '~/Screens';
+import {Header} from '~/Components';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,9 @@ function HomeNavigator() {
         //@ts-ignore
         component={GameOverScreen}
         options={{
-          header: () => null,
+          header: ({navigation}) => (
+            <Header goBack={() => navigation.goBack()} />
+          ),
         }}
       />
     </Stack.Navigator>
