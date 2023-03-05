@@ -40,7 +40,7 @@ const ScoreboardTable: React.FC = () => {
       <FlatList
         data={scoreboard}
         renderItem={renderScoreboardItem}
-        keyExtractor={item => item.userId}
+        keyExtractor={item => item.id}
         style={styles.list}
         contentContainerStyle={styles.dataRows}
       />

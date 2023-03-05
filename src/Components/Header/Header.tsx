@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, I18nManager} from 'react-native';
 
 // import {HomeDrawerParamList} from '~/Navigation/HomeNavigator';
 import {logout} from '~/Firebase/actions';
@@ -27,13 +27,13 @@ const Header: React.FC<HeaderProps> = ({goBack}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 80,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: '#f2f2f2',
+    borderColor: colors.black,
   },
   goBack: {
     fontSize: 24,

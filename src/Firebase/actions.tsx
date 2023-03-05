@@ -146,7 +146,7 @@ export const getScoreboard = async (): Promise<ScoreboardItem[]> => {
     const snapshot = await getDocs(scoreboardQuery);
     const scoreboardData = snapshot.docs.map(doc => {
       const {userId, displayName, score} = doc.data();
-      return {userId, displayName, score};
+      return {userId, displayName, score, id: doc.id};
     });
     return scoreboardData;
   } catch (error) {
