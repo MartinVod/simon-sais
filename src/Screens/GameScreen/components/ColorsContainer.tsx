@@ -5,7 +5,7 @@ import {NavigationProp} from '@react-navigation/core';
 import Sound from 'react-native-sound';
 import {StyleSheet, View} from 'react-native';
 
-import {Text} from '~/Components';
+import {Text, Spinner} from '~/Components';
 import ColorItem from './ColorItem';
 import {updateScoreboard} from '~/Firebase/actions';
 
@@ -25,6 +25,7 @@ const ColorsContainer = ({colors, round, setRound}: ColorsContainerProps) => {
   const [currentColor, setCurrentColor] = useState<string | null>(null);
   const [sequence, setSequence] = useState<string[]>([]);
   const [playerSequence, setPlayerSequence] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation<NavigationProp<HomeStackParamList>>();
 
@@ -76,12 +77,15 @@ const ColorsContainer = ({colors, round, setRound}: ColorsContainerProps) => {
 
   const handleGameOver = async () => {
     try {
+      setLoading(true);
       await updateScoreboard(round);
     } catch (error) {
       console.error('error updating scoreboard', error);
     } finally {
+      setLoading(false);
+
       //@ts-ignore
-      navigation.navigate('GameOverScreen');
+      navigation.navigate('GameOverScreen', {score: round});
     }
   };
 
@@ -145,13 +149,20 @@ const ColorsContainer = ({colors, round, setRound}: ColorsContainerProps) => {
 
   return (
     <View style={styles.colorContainer}>
-      {Object.values(colors).map(({name, height, width}) => (
-        <ColorItem
-          {...{name, height, width, currentColor}}
-          action={handleColorPress}
-          key={name}
-        />
-      ))}
+      {loading ? (
+        <>
+          <Text variant="title">Game Over</Text>
+          <Spinner />
+        </>
+      ) : (
+        Object.values(colors).map(({name, height, width}) => (
+          <ColorItem
+            {...{name, height, width, currentColor}}
+            action={handleColorPress}
+            key={name}
+          />
+        ))
+      )}
 
       <View style={[styles.action, styles.black]}>
         {round === 0 ? (

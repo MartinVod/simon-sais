@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 export type HomeStackParamList = {
   GameScreen: undefined;
-  GameOverScreen: undefined;
+  GameOverScreen: {score: number};
 };
 
 function HomeNavigator() {
@@ -23,6 +23,7 @@ function HomeNavigator() {
       />
       <Stack.Screen
         name="GameOverScreen"
+        //@ts-ignore
         component={GameOverScreen}
         options={{
           header: () => null,

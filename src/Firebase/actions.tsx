@@ -107,6 +107,7 @@ export const handleLogin = async ({
       throw error;
     } else {
       console.error('error while login', error);
+      return error;
     }
   }
 };

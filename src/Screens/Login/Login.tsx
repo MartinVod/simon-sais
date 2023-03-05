@@ -33,8 +33,8 @@ const Login = ({navigation}: LoginProps) => {
     setLoading(true);
     try {
       await handleLogin(values);
-    } catch (error) {
-      if (error?.message) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
         Alert.alert(error?.message);
       }
     } finally {

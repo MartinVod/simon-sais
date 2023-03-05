@@ -5,7 +5,7 @@ import {colors} from '~/utils/colors';
 
 interface TextProps {
   children: React.ReactNode;
-  variant?: 'title' | 'bold' | 'link' | 'reg';
+  variant?: 'title' | 'bold' | 'link' | 'reg' | 'subtitle';
   onPress?: () => void;
   color?: string;
   align?: 'left' | 'center' | 'right';
@@ -28,15 +28,6 @@ const Text: React.FC<TextProps> = ({
     color,
     ...(lineHeight && {lineHeight}),
   };
-  //   ([
-  //     textStyles.reg,
-  //     variant === 'bold' && textStyles.bold,
-  //     variant === 'title' && textStyles.title,
-  //     variant === 'link' && textStyles.link,
-  //     color && {color},
-  //     align && {textAlign: align},
-  //     lineHeight && {lineHeight},
-  //   ]);
 
   return (
     <RNText onPress={onPress} style={[textStyle, style]}>
@@ -59,7 +50,12 @@ const textStyles = StyleSheet.create({
   title: {
     fontSize: 32,
     lineHeight: 34,
-    fontWight: 500,
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
+  subtitle: {
+    fontSize: 26,
+    lineHeight: 30,
     marginVertical: 10,
   },
   link: {

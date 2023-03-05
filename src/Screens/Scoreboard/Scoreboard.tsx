@@ -1,23 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {HomeStackParamList} from '~/Navigation/HomeNavigator/HomeNavigator';
 import {Text, ScoreboardTable} from '~/Components';
 import {colors} from '~/utils/colors';
 
-type GameOverScreenProps = NativeStackScreenProps<
-  HomeStackParamList,
-  'GameOverScreen'
->;
-
-const GameOverScreen: React.FC<GameOverScreenProps> = ({route}) => {
+const Scoreboard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tableContainer}>
-        <Text variant="title">Game Over</Text>
-        <Text variant="subtitle">{`Your score: ${
-          route?.params?.score || 0
-        }`}</Text>
+        <Text variant="title">Leader Board</Text>
         <ScoreboardTable />
       </View>
     </View>
@@ -40,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameOverScreen;
+export default Scoreboard;
