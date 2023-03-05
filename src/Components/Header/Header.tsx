@@ -1,29 +1,49 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
+// import {HomeDrawerParamList} from '~/Navigation/HomeNavigator';
+import {logout} from '~/Firebase/actions';
 
 interface HeaderProps {
-  title: string;
+  // navigation: HomeDrawerParamList;
 }
 
-const Header: React.FC<HeaderProps> = ({title}) => {
+const Header: React.FC<HeaderProps> = () => {
   return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerTitle}>{title}</Text>
+    <View style={styles.container}>
+      <TouchableOpacity>
+        <Text style={styles.menu}>☰</Text>
+      </TouchableOpacity>
+      <Text style={styles.title}>Hello</Text>
+      <TouchableOpacity onPress={logout}>
+        <Text style={styles.logout}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    backgroundColor: '#f4511e',
-    height: 80,
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
+    height: 80,
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    backgroundColor: '#f2f2f2',
   },
-  headerTitle: {
-    color: '#fff',
+  menu: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  logout: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'red',
   },
 });
 

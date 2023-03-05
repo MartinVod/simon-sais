@@ -3,7 +3,8 @@ import {onAuthStateChanged} from 'firebase/auth';
 import {auth} from '~/Firebase/init';
 
 import AuthNavigator from '../AuthNavigator/AuthNavigator';
-import HomeNavigator from '../HomeNavigator/HomeNavigator';
+// import HomeNavigator from '../HomeNavigator/HomeNavigator';
+import TabNavigator from '../TabNavigator/TabNavigator';
 
 function MainNavigator() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -19,7 +20,7 @@ function MainNavigator() {
       setAuthenticated(false);
     }
   });
-  return authenticated ? <HomeNavigator /> : <AuthNavigator />;
+  return authenticated ? <TabNavigator /> : <AuthNavigator />;
 }
 
 export default MainNavigator;

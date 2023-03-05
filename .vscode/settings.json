@@ -2,5 +2,13 @@
     "cSpell.words": [
         "martinvod",
         "simonsais"
-    ]
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:SimonSais}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }

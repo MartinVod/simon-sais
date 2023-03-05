@@ -1,20 +1,29 @@
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {GameScreen} from '~/Screens';
+
+import {GameScreen, GameOverScreen} from '~/Screens';
 
 const Stack = createNativeStackNavigator();
 
-export type RootStackParamList = {
-  Game: undefined;
+export type HomeStackParamList = {
+  GameScreen: undefined;
+  GameOverScreen: undefined;
 };
 
 function HomeNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="GameScreen">
       <Stack.Screen
-        name="Game"
+        name="GameScreen"
         component={GameScreen}
+        options={{
+          header: () => null,
+        }}
+      />
+      <Stack.Screen
+        name="GameOverScreen"
+        component={GameOverScreen}
         options={{
           header: () => null,
         }}

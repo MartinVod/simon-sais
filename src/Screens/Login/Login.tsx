@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, Alert} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 
 import {Input, SubmitButton, Text} from '~/Components';
@@ -7,6 +7,8 @@ import {RootStackParamList} from '~/Navigation/AuthNavigator/AuthNavigator';
 
 import Logo from '~/Assets/Images/Logo.png';
 import {colors} from '~/utils/colors';
+
+import {handleLogin} from '~/Firebase/actions';
 
 type LoginProps = {
   navigation: NavigationProp<RootStackParamList, 'Login'>;
@@ -29,7 +31,15 @@ const Login = ({navigation}: LoginProps) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    setLoading(false);
+    try {
+      await handleLogin(values);
+    } catch (error) {
+      if (error?.message) {
+        Alert.alert(error?.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const navigateToSignUp = () => {
@@ -53,7 +63,7 @@ const Login = ({navigation}: LoginProps) => {
         name="password"
         secureTextEntry
       />
-      <SubmitButton onPress={handleSubmit} label="Submit" disabled={loading} />
+      <SubmitButton onPress={handleSubmit} label="Submit" loading={loading} />
       <Text variant="link" lineHeight={40} onPress={navigateToSignUp}>
         or sign up
       </Text>
