@@ -4,6 +4,7 @@ export interface ScoreboardItem {
     userId: string;
     displayName: string;
     score: number;
+    id:string;
 }
 
 export type difficultiesType = 'easy' | 'medium' | 'hard';

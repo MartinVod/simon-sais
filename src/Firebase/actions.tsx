@@ -5,17 +5,18 @@ import {
   updateProfile,
   Auth,
 } from 'firebase/auth';
-import {
-  collection,
-  query,
-  where,
-  orderBy,
-  limit,
-  getDocs,
-  addDoc,
-} from 'firebase/firestore';
+// import {
+//   collection,
+//   query,
+//   where,
+//   orderBy,
+//   limit,
+//   getDocs,
+//   addDoc,
+// } from 'firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 
-import {db} from './init';
+// import {db} from './init';
 
 import {FirebaseError} from '@firebase/util';
 
@@ -111,18 +112,18 @@ export const handleLogin = async ({
     }
   }
 };
+
 export const updateScoreboard = async (score: number): Promise<void> => {
   const user = getAuth().currentUser;
 
-  const scoreboardRef = collection(db, 'scores');
+  const scoresRef = firestore().collection('scores');
+
   // Get the highest score for the user
-  const userScoresQuery = query(
-    scoreboardRef,
-    where('userId', '==', user?.uid),
-    orderBy('score', 'desc'),
-    limit(1),
-  );
-  const userScoresSnapshot = await getDocs(userScoresQuery);
+  const userScoresQuery = scoresRef
+    .where('userId', '==', user?.uid)
+    .orderBy('score', 'desc')
+    .limit(1);
+  const userScoresSnapshot = await userScoresQuery.get();
 
   // If the user has a higher score than their highest score, add it to the scoreboard
   if (
@@ -130,20 +131,20 @@ export const updateScoreboard = async (score: number): Promise<void> => {
     score > userScoresSnapshot.docs[0].data().score
   ) {
     Alert.alert('new high score!');
-    await addDoc(scoreboardRef, {
+    await scoresRef.add({
       userId: user?.uid,
       displayName: user?.displayName,
       score,
     });
   }
 };
-export const getScoreboard = async (): Promise<ScoreboardItem[]> => {
-  const scoreboardRef = collection(db, 'scores');
 
-  // Query the scoreboard collection and order the results by score in descending order
+export const getScoreboard = async (): Promise<ScoreboardItem[]> => {
+  const scoreboardRef = firestore().collection('scores');
+
   try {
-    const scoreboardQuery = query(scoreboardRef, orderBy('score', 'desc'));
-    const snapshot = await getDocs(scoreboardQuery);
+    const scoreboardQuery = scoreboardRef.orderBy('score', 'desc');
+    const snapshot = await scoreboardQuery.get();
     const scoreboardData = snapshot.docs.map(doc => {
       const {userId, displayName, score} = doc.data();
       return {userId, displayName, score, id: doc.id};
