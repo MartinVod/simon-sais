@@ -29,7 +29,7 @@ const ColorsContainer = ({colors, round, setRound}: ColorsContainerProps) => {
 
   const navigation = useNavigation<NavigationProp<HomeStackParamList>>();
 
-  Sound.setCategory('Ambient');
+  Sound.setCategory('Playback');
 
   const createSoundClass = useCallback((colorsArray: colorItem[]) => {
     return colorsArray.reduce((soundObject, color) => {
@@ -77,6 +77,7 @@ const ColorsContainer = ({colors, round, setRound}: ColorsContainerProps) => {
 
   const handleGameOver = async () => {
     try {
+      resetGame();
       setLoading(true);
       await updateScoreboard(round);
     } catch (error) {

@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     borderColor: colors.black,
+    backgroundColor: colors.fill,
   },
   goBack: {
     fontSize: 24,

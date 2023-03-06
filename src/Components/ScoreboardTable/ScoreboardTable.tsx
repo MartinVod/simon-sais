@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, Text, FlatList, StyleSheet, I18nManager} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 
 import {getScoreboard} from '~/Firebase/actions';
 import {ScoreboardItem} from '~/Types';
@@ -8,11 +9,11 @@ import {colors} from '~/utils/colors';
 const ScoreboardTable: React.FC = () => {
   const [scoreboard, setScoreboard] = useState<ScoreboardItem[]>([]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     getScoreboard().then((scoreList: ScoreboardItem[]) =>
       setScoreboard(scoreList),
     );
-  }, []);
+  });
 
   const renderScoreboardItem = ({
     item,
